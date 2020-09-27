@@ -1,0 +1,69 @@
+---
+
+- name: LIST OF NETWORK INTERFACES 
+  hosts: all
+
+  tasks:
+  - name: List of network interfaces
+    debug:
+      msg:
+        - "Network interface is {{ ansible_interfaces }}"
+
+- name: CREATE REPORT NO JINJA 
+  hosts: dc
+  become: yes
+  gather_facts: false
+
+  tasks:
+  - name: Create report with no Jinja
+    shell: uptime
+    register: hostname
+  - debug:
+      var: hostname
+  - local_action: 
+      module: copy 
+      content: "{{ hostname }}"
+      dest: /home/vagrant/hometask-playbook/reports/uptime.txt
+    delegate_to: control
+
+- name: CREATE REPORT WITH JINJA
+  hosts: dc
+  become: yes
+  gather_facts: false
+
+  tasks:
+  - name: Create report with Jinja
+    template:
+       src: /home/vagrant/hometask-playbook/templates/reports.j2
+       dest: /home/vagrant/hometask-playbook/reports/reports.txt
+    delegate_to: localhost
+
+- name: Create New Users
+  hosts: web1
+  become: true
+  gather_facts: false
+  no_log: true
+  vars_files:
+    - my_vault.yml
+
+  tasks:
+    - name: Create Users
+      user:
+        name: "{{ item }}"
+        password: "{{ my_password | password_hash('sha512') }}"
+        shell: /bin/bash
+        update_password: on_create
+      loop:
+        - user1
+        - user2
+        - user3
+        - user4
+        - user5  
+
+- name: INSTALL PACKAGE
+  hosts: all
+  become: yes
+  gather_facts: false
+
+  roles: 
+  - common
