@@ -1,0 +1,19 @@
+---
+- name: Add a whoami.html file to default web-server location
+  template:
+   src: ./whoami.html
+   dest: /var/www/html/
+
+
+- name: Add a whoami2.html.j2 file to default web-server location
+  template:
+   src: ./whoami2.html.j2
+   dest: /var/www/html/
+  notify:
+    - Restart httpd process
+
+- name: Start service httpd, if not started
+  service:
+    name: httpd
+    state: started
+

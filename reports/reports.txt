@@ -1,0 +1,3 @@
+List of linux hosts checked:
+node1:  {'changed': True, 'end': '2020-09-27 04:13:17.647836', 'stdout': ' 04:13:17 up  8:24,  1 user,  load average: 0.16, 0.08, 0.07', 'cmd': 'uptime', 'rc': 0, 'start': '2020-09-27 04:13:17.643226', 'stderr': '', 'delta': '0:00:00.004610', 'stdout_lines': [' 04:13:17 up  8:24,  1 user,  load average: 0.16, 0.08, 0.07'], 'stderr_lines': [], 'failed': False}
+node2:  {'changed': True, 'end': '2020-09-27 04:13:27.720948', 'stdout': ' 04:13:27 up  8:24,  1 user,  load average: 0.04, 0.03, 0.05', 'cmd': 'uptime', 'rc': 0, 'start': '2020-09-27 04:13:27.716409', 'stderr': '', 'delta': '0:00:00.004539', 'stdout_lines': [' 04:13:27 up  8:24,  1 user,  load average: 0.04, 0.03, 0.05'], 'stderr_lines': [], 'failed': False}

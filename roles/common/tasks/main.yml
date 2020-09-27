@@ -1,0 +1,6 @@
+---
+
+- include_tasks: package.yml
+- include_tasks: add_html.yml
+
+
